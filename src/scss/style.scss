@@ -1,0 +1,97 @@
+@import 'variables';
+
+a {
+  color: $linkColor;
+}
+
+.default-list {
+  list-style: none;
+
+  li {
+    font-style: italic;
+
+    & + li {
+      margin-top: 20px;
+    }
+    &.active {
+      font-weight: bold;
+    }
+
+    a {
+      color: violet;
+
+      &:hover {
+        color: darkcyan;
+      }
+    }
+  }
+}
+
+%alert {
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.alert-info {
+  @extend %alert;
+  background-color: $infoColor;
+}
+
+.alert-error {
+  @extend %alert;
+  background-color: $errorColor;
+}
+
+.alert-success {
+  @extend %alert;
+  background-color: $successColor;
+
+  @media (max-width: 1199px) {
+    color: #adc700;
+  }
+}
+
+@media (max-width: $lg) {
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+@mixin size ($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.some-box {
+  @include size(50px, 60px);
+}
+
+$type: yellow;
+
+
+p {
+  @if $type == yellow {
+    color: chocolate;
+  } @else if $type == red {
+    color: black;
+  } @else {
+    color: green;
+  }
+}
+
+%col {
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding: 0 15px;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+
+    @extend %col;
+    width: 1 / 12 * $i * 100%;
+  }
+}
